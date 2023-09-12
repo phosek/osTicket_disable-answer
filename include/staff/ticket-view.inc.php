@@ -987,8 +987,15 @@ if ($errors['err'] && isset($_POST['a'])) {
                     ?>
                     <select id="reply-to" name="reply-to">
                         <?php
+						$spojeni = mysqli_connect(DBHOST,DBUSER,DBPASS, "cis_extra");
+						$did = $dept->getId();
+						$cis_disable_answer = mysqli_query($spojeni, "SELECT * FROM `cis_disable_answer` WHERE `department_id` = $did");
+						while ($zaznam_disable_answer = mysqli_fetch_array ($cis_disable_answer)) {$ddisable = $zaznam_disable_answer["disable"];}
+						$dvalue = '<option value="%s" %s>%s</option>';
+						if ($ddisable == 1) {$dvalue = '<option value="%s" %s selected>%s</option>';}
+						
                         foreach ($replyTypes as $k => $v) {
-                            echo sprintf('<option value="%s" %s>%s</option>',
+                            echo sprintf($dvalue,
                                     $k,
                                     ($k == $replyTo) ?
                                     'selected="selected"' : '',

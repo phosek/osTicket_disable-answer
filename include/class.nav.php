@@ -218,6 +218,7 @@ class AdminNav extends StaffNav{
             $tabs['manage']=array('desc'=>__('Manage'),'href'=>'helptopics.php','title'=>__('Manage Options'));
             $tabs['emails']=array('desc'=>__('Emails'),'href'=>'emails.php','title'=>__('Email Settings'));
             $tabs['staff']=array('desc'=>__('Agents'),'href'=>'staff.php','title'=>__('Manage Agents'));
+            $tabs['custom']=array('desc'=>__('Custom settings'),'href'=>'disable-answer_settings.php','title'=>__('Custom settings'));
             if (!is_null($this->getRegisteredApps()))
                 $tabs['apps']=array('desc'=>__('Applications'),'href'=>'apps.php','title'=>__('Applications'));
             $this->tabs=$tabs;
@@ -276,6 +277,9 @@ class AdminNav extends StaffNav{
                 case 'apps':
                     foreach ($this->getRegisteredApps() as $app)
                         $subnav[] = $app;
+                    break;
+                case 'custom':
+                    $subnav[]=array('desc'=>__('Disable answer'),'href'=>'disable-answer_settings.php','iconclass'=>'email-autoresponders');
                     break;
             }
             if($subnav)
